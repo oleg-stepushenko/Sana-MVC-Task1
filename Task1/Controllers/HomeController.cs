@@ -17,7 +17,13 @@ namespace Task1.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Hello([FromBody] User user)
+        {
+            if (!ModelState.IsValid) return BadRequest();
 
+            return Ok("Hello, " + user.name);
+        }
         public IActionResult Privacy()
         {
             return View();

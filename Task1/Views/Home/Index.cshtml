@@ -7,14 +7,57 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             <h1 class="display-4">Say project</h1>
-        <form>
+        <form id="enter-name">
             <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter name">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
+            <div id="message"><p id="result"></p></div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        var formEnterName = document.querySelector('#enter-name');
+        var resultValue = document.querySelector('#result');
+  
+
+        formEnterName.addEventListener('submit', function (event) {
+            var nameValue = formEnterName.querySelector('#name').value;
+            event.preventDefault();
+            fetch('/Home/Hello', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: nameValue
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                        throw new Error('Enter Name');
+                }
+                return response.text();
+             })
+                .then(result => {
+                    if (resultValue.classList.contains('error')) {
+                        resultValue.classList.remove('error');
+                    }
+                    resultValue.classList.add('success');
+                    resultValue.innerHTML = result;
+                })
+                .catch(error => {
+                    console.log(error);
+                    resultValue.classList.add('error');
+                    resultValue.innerHTML = error.message;;
+                    if (resultValue.classList.contains('success')) {
+                        resultValue.classList.remove('success');
+                    }
+                });
+        });
+    });
+</script>

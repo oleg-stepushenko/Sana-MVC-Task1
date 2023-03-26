@@ -5,7 +5,7 @@ namespace Task1.Models
     public class User
     {
         [Required]
-        public string Name { set; get; }
+        public string name { set; get; }
     }
 }
 
