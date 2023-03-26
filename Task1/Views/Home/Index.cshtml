@@ -1,4 +1,4 @@
-﻿
+﻿@model Task1.Models.User;
 @{
     ViewData["Title"] = "Small task";
 }
@@ -7,13 +7,14 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             <h1 class="display-4">Say project</h1>
-        <form id="enter-name">
-            <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name">
-            </div>
+            @using (Html.BeginForm("Hello", "Home", FormMethod.Post, new { id = "enter-name" }))
+            {
+                <div class="form-group">
+                    @Html.Label("name", "Name", new { @class = "name-label" })
+                    @Html.TextBoxFor(model => model.name, new { @class = "form-control", id = "name", placeholder = "Enter name" })
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            }
             <div id="message"><p id="result"></p></div>
         </div>
     </div>

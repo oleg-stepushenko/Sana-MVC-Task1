@@ -24,10 +24,6 @@ namespace Task1.Controllers
 
             return Ok("Hello, " + user.name);
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
